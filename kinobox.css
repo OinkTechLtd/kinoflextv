@@ -1,76 +1,105 @@
-/*!
- * kinobox.css — KinoBox.tv
- * Подключи этот файл если используешь kinobox.js на своём сайте
- */
-
-/* Стили инжектируются автоматически через kinobox.js.
-   Этот файл нужен только если ты хочешь переопределить стили. */
-
-.kb__wrap {
-  width: 100%;
-  font-family: "Montserrat", "Segoe UI", sans-serif;
-  background: #080c18;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid #1e2540;
+:root {
+  --accent-color: #007aff;
+  --bg-main: #0a0a0c;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --radius: 12px;
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
 }
 
-.kb__menu {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 10px 12px;
-  background: #0b1020;
-  border-bottom: 1px solid #1e2540;
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-.kb__btn {
-  cursor: pointer;
-  padding: 6px 15px;
-  border-radius: 30px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #8aa0d4;
-  background: #141929;
-  border: 1px solid #1e2a48;
-  transition: background .15s, color .15s;
-  user-select: none;
+.kinobox-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px;
 }
 
-.kb__btn:hover { background: #1e2a48; color: #fff; }
-
-.kb__btn.kb__active {
-  background: #3b5bdb;
-  color: #fff;
-  border-color: #3b5bdb;
-  box-shadow: 0 1px 8px rgba(59,91,219,.4);
-}
-
-.kb__frame {
+.player-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 56.25%;
-}
-
-.kb__frame iframe {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  border: none;
+  aspect-ratio: 16/9;
   background: #000;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--glass-border);
 }
 
-.kb__loading {
-  padding: 60px 20px;
-  text-align: center;
-  color: #6a78a3;
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.controls-panel {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+  background: var(--bg-card);
+  padding: 15px;
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+}
+
+.source-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  padding: 10px 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
   font-size: 13px;
+  text-align: center;
+  font-weight: 500;
 }
 
-.kb__error {
-  padding: 40px 20px;
-  text-align: center;
-  color: #fca5a5;
-  font-size: 12px;
-  line-height: 1.7;
+.source-btn:hover {
+  background: var(--accent-color);
+  color: white;
+  transform: translateY(-2px);
+  border-color: transparent;
+}
+
+.source-btn.active {
+  background: var(--accent-color);
+  color: white;
+  box-shadow: 0 0 15px rgba(0, 122, 255, 0.4);
+}
+
+.movie-info {
+  margin-bottom: 15px;
+}
+
+.movie-info h1 {
+  margin: 0 0 5px 0;
+  font-size: 1.8rem;
+  letter-spacing: -0.5px;
+}
+
+.movie-info p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .controls-panel {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .movie-info h1 {
+    font-size: 1.4rem;
+  }
 }
